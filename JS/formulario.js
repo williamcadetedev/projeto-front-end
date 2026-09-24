@@ -1,4 +1,39 @@
 import { templateCadastro } from "./templates.js";
+function validarCpf(cpf) {
+    const numeros = cpf.replace(/\D/g, "");
+
+    if (numeros.length !== 11) {
+        return false;
+    }
+
+    if (/^(\d)\1{10}$/.test(numeros)) {
+        return false;
+    }
+
+    function calcularDigito(quantidade) {
+        let soma = 0;
+
+        for (let i = 0; i < quantidade; i++) {
+            soma += Number(numeros[i]) * (quantidade + 1 - i);
+        }
+
+        const resto = soma % 11;
+
+        return resto < 2 ? 0 : 11 - resto;
+    }
+
+    const primeiroDigito = calcularDigito(9);
+
+    if (primeiroDigito !== Number(numeros[9])) {
+        return false;
+    }
+
+    const segundoDigito = calcularDigito(10);
+
+    return segundoDigito === Number(numeros[10]);
+}
+
+    // A verificação dos dois últimos dígitos será adicionada aqui.
 
 export function configurarFormulario() {
     const formulario = document.querySelector("#form-cadastro");
@@ -35,14 +70,18 @@ export function configurarFormulario() {
          }
 }
 export function mostrarCadastro() {
-        conteudo.innerHTML = templateCadastro();
+    const conteudo = document.querySelector("#conteudo");
+
+    conteudo.innerHTML = templateCadastro();
     configurarFormulario();
 
     const campoTelefone = conteudo.querySelector("#telefone");
     const campoCpf = conteudo.querySelector("#cpf");
 
     campoTelefone.addEventListener("input", function () {
-        const numeros = campoTelefone.value.replace(/\D/g, "").slice(0, 11);
+        const numeros = campoTelefone.value
+            .replace(/\D/g, "")
+            .slice(0, 11);
 
         if (numeros.length === 0) {
             campoTelefone.value = "";
@@ -58,7 +97,9 @@ export function mostrarCadastro() {
     });
 
     campoCpf.addEventListener("input", function () {
-        const numeros = campoCpf.value.replace(/\D/g, "").slice(0, 11);
+        const numeros = campoCpf.value
+            .replace(/\D/g, "")
+            .slice(0, 11);
 
         if (numeros.length <= 3) {
             campoCpf.value = numeros;
@@ -71,6 +112,14 @@ export function mostrarCadastro() {
         } else {
             campoCpf.value =
                 `${numeros.slice(0, 3)}.${numeros.slice(3, 6)}.${numeros.slice(6, 9)}-${numeros.slice(9)}`;
+        }
+
+        if (campoCpf.value === "") {
+            campoCpf.setCustomValidity("");
+        } else if (!validarCpf(campoCpf.value)) {
+            campoCpf.setCustomValidity("Digite um CPF válido.");
+        } else {
+            campoCpf.setCustomValidity("");
         }
     });
 }
