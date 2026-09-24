@@ -1,0 +1,451 @@
+/* Configuração geral */
+body {
+margin: 0;
+font-family: Arial, sans-serif;
+background-color: #f4f4f4;
+color: #333;
+}
+/* Conteúdo principal */
+main {
+width: 80%;
+margin: auto;
+background-color: white;
+}
+/* Cabeçalho */
+header {
+background-color: #2e8b57;
+color: white;
+padding: 20px;
+}
+/* Logo */
+.logo {
+display: flex;
+align-items: center;
+gap: 15px;
+color: white;
+text-decoration: none;
+}
+.logo img {
+width: 100px;
+height: auto;
+}
+.logo h1 {
+margin: 0;
+font-size: 32px;
+}
+/* Menu de navegação */
+nav {
+display: flex;
+flex-direction: row;
+margin-left: 12px;
+margin-top: 25px;
+}
+nav a {
+color: white;
+text-decoration: none;
+margin-right: 30px;
+font-weight: bold;
+}
+nav a:hover {
+text-decoration: underline;
+}
+/* Seção de projetos */
+section {
+padding: 30px;
+}
+section h2 {
+color: #2e8b57;
+}
+/* Cada projeto */
+article {
+background-color: #f0f8f4;
+padding: 20px;
+margin-top: 20px;
+border-left: 5px solid #2e8b57;
+}
+article h3 {
+color: #2e8b57;
+margin-top: 10px;
+}
+/* Parágrafos /
+p {
+line-height: 1.25;
+}
+/ Grid principal com 12 colunas */
+main {
+display: grid;
+grid-template-columns: repeat(12, 1fr);
+}
+header,
+section {
+grid-column: 1 / -1;
+}
+/* Grid da seção de projetos */
+section {
+display: grid;
+grid-template-columns: repeat(1, 1fr);
+gap: 15px;
+}
+section h2,
+section > p {
+grid-column: 1 / -1;
+margin-top: -1px;
+}
+article {
+display: flex;
+flex-direction: column;
+margin-top: -1px;
+}
+article h3 {
+margin-top: 10px;
+margin-bottom: 15px;
+}
+article p {
+margin-top: 0;
+}
+/* 1º breakpoint: telas grandes */
+@media (max-width: 1200px) {
+main {
+width: 90%;
+}
+}
+/* 2º breakpoint: notebooks */
+@media (max-width: 992px) {
+article {
+grid-column: span 6;
+}
+}
+/* 3º breakpoint: tablets */
+@media (max-width: 768px) {
+main {
+width: 95%;
+}
+.logo {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+nav a {
+    margin-right: 15px;
+}
+}
+/* 4º breakpoint: celulares */
+@media (max-width: 576px) {
+main {
+width: 100%;
+}
+article {
+    grid-column: 1 / -1;
+}
+
+nav {
+    display: grid;
+    gap: 10px;
+}
+
+.logo h1 {
+    font-size: 26px;
+}
+}
+/* 5º breakpoint: celulares pequenos */
+@media (max-width: 400px) {
+header,
+section {
+padding: 15px;
+}
+.logo img {
+    width: 75px;
+}
+
+.logo h1 {
+    font-size: 20px;
+}
+
+p {
+    font-size: 14px;
+}
+}
+/* Ajustes do cabeçalho */
+
+header {
+    position: relative;
+}
+
+/* Botão hambúrguer */
+
+.menu-hamburguer {
+    display: none;
+    position: absolute;
+    top: 25px;
+    right: 20px;
+
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Dropdown */
+
+.dropdown {
+    position: relative;
+}
+
+.botao-dropdown {
+    background: none;
+    border: none;
+    padding: 0;
+    margin-right: 30px;
+
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.botao-dropdown:hover {
+    text-decoration: underline;
+}
+
+.submenu {
+    min-width: 190px;
+    position: absolute;
+    top: 25px;
+    left: 0;
+    z-index: 10;
+
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: 0.3s;
+}
+
+.submenu a {
+    display: block;
+    padding: 12px 15px;
+    margin: 0;
+    color: #2e8b57;
+}
+
+.submenu a:hover {
+    background-color: #f0f8f4;
+    text-decoration: none;
+}
+
+/* Abre o submenu no computador */
+
+.dropdown:hover .submenu,
+.dropdown:focus-within .submenu,
+.dropdown.submenu-aberto .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Menu para tablets e celulares */
+
+@media (max-width: 768px) {
+    .menu-hamburguer {
+        display: block;
+    }
+
+    nav {
+        width: 100%;
+        margin-left: 0;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        pointer-events: none;
+
+        transition:
+            max-height 0.4s ease,
+            opacity 0.3s ease;
+    }
+
+    nav.menu-aberto {
+        max-height: 500px;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    nav a {
+        margin-right: 0;
+    }
+
+    .dropdown {
+        width: 100%;
+    }
+
+    .botao-dropdown {
+        margin-right: 0;
+    }
+
+    .submenu {
+        position: static;
+        max-height: 0;
+        overflow: hidden;
+        box-shadow: none;
+
+        opacity: 0;
+        visibility: hidden;
+        transform: none;
+    }
+
+    .dropdown.submenu-aberto .submenu {
+        max-height: 250px;
+        margin-top: 10px;
+        opacity: 1;
+        visibility: visible;
+    }
+}
+/* Interações dos campos do formulário */
+
+form fieldset {
+    display: flex;
+    flex-direction: column;
+}
+
+form input {
+    padding: 10px;
+    border: 2px solid #cccccc;
+    border-radius: 8px;
+    outline: none;
+
+    transition:
+        border-color 0.3s,
+        box-shadow 0.3s;
+}
+
+/* Campo selecionado */
+
+form input:focus {
+    border-color: #2e8b57;
+    box-shadow: 0 0 5px rgba(46, 139, 87, 0.4);
+}
+
+/* Campo preenchido corretamente */
+
+form input:user-valid {
+    border-color: #2e8b57;
+}
+
+/* Campo preenchido incorretamente */
+
+form input:user-invalid {
+    border-color: #c62828;
+    box-shadow: 0 0 5px rgba(198, 40, 40, 0.3);
+}
+
+/* Botão do formulário */
+
+.botao-enviar {
+    margin-top: 20px;
+    padding: 12px 20px;
+
+    background-color: #2e8b57;
+    color: white;
+    border: none;
+    border-radius: 5px;
+
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+
+    transition:
+        background-color 0.3s,
+        opacity 0.3s,
+        transform 0.2s;
+}
+
+.botao-enviar:hover {
+    background-color: #246f46;
+}
+
+.botao-enviar:focus {
+    box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.4);
+    outline: none;
+}
+
+.botao-enviar:active {
+    transform: scale(0.97);
+}
+
+.botao-enviar:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+/* Toast */
+
+#toast {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+
+    padding: 15px 20px;
+    border-radius: 5px;
+
+    color: white;
+    font-weight: bold;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+
+    transition:
+        opacity 0.3s,
+        transform 0.3s,
+        visibility 0.3s;
+}
+
+#toast.sucesso {
+    background-color: #2e8b57;
+}
+
+#toast.erro {
+    background-color: #c62828;
+}
+
+#toast.mostrar {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.alerta {
+    margin-bottom: 20px;
+    padding: 15px;
+
+    background-color: #fff3cd;
+    color: #664d03;
+
+    border: 1px solid #ffecb5;
+    border-left: 5px solid #f0ad4e;
+    border-radius: 5px;
+}
+.badge {
+    align-self: flex-start;
+    display: inline-block;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+
+    background-color: #2e8b57;
+    color: white;
+
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
