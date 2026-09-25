@@ -240,8 +240,6 @@ header {
 
 /* Abre o submenu no computador */
 
-.dropdown:hover .submenu,
-.dropdown:focus-within .submenu,
 .dropdown.submenu-aberto .submenu {
     opacity: 1;
     visibility: visible;
@@ -448,4 +446,55 @@ form input:user-invalid {
     border-radius: 20px;
     font-size: 13px;
     font-weight: bold;
+}
+/* Cabeçalho alinhado ao conteúdo principal */
+body > header {
+    box-sizing: border-box;
+    width: 80%;
+    margin: 0 auto;
+}
+
+@media (max-width: 1200px) {
+    body > header {
+        width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    body > header {
+        width: 95%;
+    }
+
+    nav {
+        visibility: hidden;
+    }
+
+    nav.menu-aberto {
+        visibility: visible;
+    }
+}
+
+nav.menu-aberto {
+    visibility: visible;
+}
+    }
+}
+
+@media (max-width: 576px) {
+    body > header {
+        width: 100%;
+    }
+}
+/* Espaçamento entre os campos do cadastro */
+#form-cadastro label:not(:first-of-type) {
+    margin-top: 15px;
+}
+
+#form-cadastro label {
+    margin-bottom: 6px;
+}
+
+#form-cadastro small {
+    margin-top: 2px;
+    line-height: 1.4;
 }
