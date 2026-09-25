@@ -57,13 +57,12 @@ export function templateProjetos() {
 export function templateCadastro() {
     return `
         <h2> Cadastre-se </h2>
-            <a class="alerta" role="status">
+           <p class="alerta" id="instrucoes-cadastro">
                 <strong>Atenção:</strong>
-                Preencha todos os campos seguindo os formatos indicados.
-            </a>
+                Todos os campos são obrigatórios. Preencha seguindo os formatos indicados.
+            </p>
 
-            <form id="form-cadastro">
-                <fieldset>
+            <form id="form-cadastro" aria-describedby="instrucoes-cadastro">                <fieldset>
                         <legend>Informações Pessoais</legend>
         
                         <label for="nome">Nome Completo:</label>
@@ -76,12 +75,14 @@ export function templateCadastro() {
                         <label for="cpf">CPF:</label>
                         <input type="text" 
                                 id="cpf" 
+                                aria-describedby="ajuda-cpf"
                                 name="cpf"
                                 pattern="[0-9]{3}\\.[0-9]{3}\\.[0-9]{3}-[0-9]{2}" 
                                 placeholder="000.000.000-00" 
                                 title="Formato: 000.000.000-00"
                                 required
                         >
+                        <small id="ajuda-cpf">Formato: 000.000.000-00.</small>
         
                         <label for="email">E-mail:</label>
                         <input type="email" 
@@ -100,30 +101,34 @@ export function templateCadastro() {
                         <label for="cep">CEP:</label>
                         <input type="text" 
                                 id="cep"
+                                aria-describedby="ajuda-cep"
                                 name="cep"
                                 pattern="[0-9]{5}-[0-9]{3}"
                                 placeholder="00000-000" 
                                 title="Formato: 00000-000"
                                 required
                         >
+                        <small id="ajuda-cep">Formato: 00000-000. Inclua o hífen.</small>
 
                         <label for="telefone">Telefone:</label>
                         <input 
                                 type="tel"
                                 id="telefone"
+                                aria-describedby="ajuda-telefone"
                                 name="telefone"
                                 pattern="\\([0-9]{2}\\) [0-9]{5}-[0-9]{4}"
                                 placeholder="(00) 00000-0000"
                                 title="Formato: (00) 00000-0000"
                                 required
                         >
+                        <small id="ajuda-telefone">Formato: (00) 00000-0000.</small>
         
                 </fieldset>
                 <button class="botao-enviar" type="submit">
                      Enviar formulário 
                 </button>
 
-                </form>
+            </form>
             <div id="toast" role="status" aria-live="polite"></div>
     `;
 }
