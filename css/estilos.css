@@ -477,8 +477,6 @@ body > header {
 nav.menu-aberto {
     visibility: visible;
 }
-    }
-}
 
 @media (max-width: 576px) {
     body > header {
